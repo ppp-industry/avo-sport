@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: landing
+  namespace: __NAMESPACE__
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: landing
+  template:
+    metadata:
+      namespace: __NAMESPACE__
+      labels:
+        app: landing
+    spec:
+      containers:
+        - name: landing
+          image: cr.yandex/__CONTAINER_REGISTRY_ID__/landing:__VERSION__
+          imagePullPolicy: Always
+          env:
+            - name: NODE_ENV
+              value: __ENV_MODE__
+          ports:
+            - containerPort: 3001
