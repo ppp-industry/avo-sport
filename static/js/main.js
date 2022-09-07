@@ -46,3 +46,21 @@ const teamSlider = new Swiper(".team-slider", {
     el: ".team-pagination",
   },
 });
+
+const links = document.querySelectorAll('a[href*="#"]');
+
+links.forEach(link => link.addEventListener('click', smoothScroll));
+
+function smoothScroll(e) {
+  e.preventDefault();
+  const href = this.getAttribute('href');
+  const offsetTop = document.querySelector(href).offsetTop - 100;
+  document.querySelector('body').style.overflow = 'initial';
+  burger.classList.remove('active');
+  header.classList.remove('open');
+
+  scroll({
+    top: offsetTop,
+    behavior: 'smooth'
+  });
+}
